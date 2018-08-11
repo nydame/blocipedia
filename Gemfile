@@ -74,3 +74,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add Figaro
 gem 'figaro', '1.0'
+
+# Add Devise for Authentication
+gem 'devise'
