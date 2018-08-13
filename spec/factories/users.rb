@@ -13,7 +13,7 @@ end
 
   factory :user do
     # username random_username
-    sequence(:email){|n| "user{n}@blocipedia.com"}
+    sequence(:email){|n| "user#{n}@blocipedia.com"}
     password pw
     password_confirmation pw
   end
