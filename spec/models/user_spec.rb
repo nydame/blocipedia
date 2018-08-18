@@ -3,7 +3,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   User.delete_all
-  
+  let(:user) {create(:user)}
+  # it {is_expected.to have_many(:wikis)}
+
   describe "attributes" do
     tester = FactoryGirl.build :user
     it "has a username and an email" do
