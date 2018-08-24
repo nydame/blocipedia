@@ -78,3 +78,6 @@ gem 'figaro', '1.0'
 
 # Add Devise for Authentication
 gem 'devise'
+
+# Add Pundit for Authorization
+gem 'pundit'
