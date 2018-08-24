@@ -3,9 +3,13 @@
     <h1 class="col-sm-9">Wiki Listing</h1>
     <%= link_to 'Start a new wiki', new_wiki_path, class: 'btn btn-success col-sm-3' %>
   </div>
+  <% if @wikis.count === 0 %>
+  <p>There are no wikis yet. Why don't <strong>you</strong> start one? ;)</p>
+  <% else %>
   <% @wikis.each do |wiki| %>
     <div class="row">
       <p><%= link_to wiki.title, wiki_path(wiki) %></p>
     </div>
+  <% end %>
   <% end %>
 </div>

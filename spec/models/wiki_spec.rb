@@ -8,7 +8,7 @@ RSpec.describe Wiki, type: :model do
 
   describe "attributes -" do
     it "has a title, body, privacy status and user" do
-      expect(wiki).to have_attributes(title: wiki.title, body: wiki.body, private?: wiki.private?, user: wiki.user)
+      expect(wiki).to have_attributes(title: wiki.title, body: wiki.body, private: wiki.private?, user: wiki.user)
     end
   end
 end

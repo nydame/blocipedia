@@ -1,7 +1,19 @@
 // Place all the styles related to the Wikis controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.byline {text-align: right;}
-.byline::before {
-  content: "\2014 ";
+.container {
+  margin-top: 20px;
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.byline {
+  font-weight: bold;
+}
+.author::before {
+  // content: "\2014 ";
+}
+.author {
+  font-style: italic;
 }
