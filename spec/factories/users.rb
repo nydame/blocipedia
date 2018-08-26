@@ -8,5 +8,7 @@ FactoryGirl.define do
     sequence(:email){|n| "user#{n}@blocipedia.com"}
     password pw
     password_confirmation pw
+    # role :standard
   end
+  
 end

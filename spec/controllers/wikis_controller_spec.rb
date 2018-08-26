@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  # Create wiki belonging to signed-in user
+  # Reset
+  User.delete_all
+  Wiki.delete_all
+  # Create wiki and users
   let!(:wiki_owner) { FactoryGirl.create(:user) }
-  let!(:another_user) {FactoryGirl.create(:user)}
-  # let!(:wiki) { FactoryGirl.create(:wiki, user: wiki_owner) }
+  let!(:another_user) { FactoryGirl.create(:user) }
 
   before do
     wiki_owner.confirm
@@ -27,7 +29,8 @@ RSpec.describe WikisController, type: :controller do
       expect(response).to redirect_to(new_user_session_path)
     end
     it "assigns [wiki] to @wikis" do
-      # wiki = FactoryGirl.create(:wiki)
+      Wiki.delete_all
+      wiki = FactoryGirl.create(:wiki)
       get :index
       expect(assigns(:wikis)).to eq([wiki])
     end

@@ -24,8 +24,8 @@ module RandomData
     end
     # Capitalize 2 random words to create a name
     def self.random_name
-        first_name = random_word.capitalize
-        last_name = random_word.capitalize
+        first_name = self.random_word.capitalize
+        last_name = self.random_word.capitalize
         "#{first_name} #{last_name}"
     end
     # Use random words to spoof an email address
@@ -41,12 +41,13 @@ module RandomData
     def self.random_password
       characters = ('a'..'z').to_a.concat(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
       characters.shuffle!
-      characters[0, rand(8..12)]
+      characters[0, rand(8..12)].join
     end
 
     def self.random_username
-      characters = ('a'..'z').to_a.shuffle
-      characters[0, rand(4..10)]
+      characters = ('a'..'z').to_a
+      characters.shuffle!
+      characters[0, rand(4..10)].join
     end
 
 end

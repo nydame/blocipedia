@@ -11,6 +11,13 @@ RSpec.describe User, type: :model do
     it "has a username and an email" do
       expect(tester).to have_attributes(username: tester.username, email: tester.email)
     end
+    tester.save
+    it "responds to role" do
+      expect(tester).to respond_to(:role)
+    end
+    it "is standard by default" do
+      expect(tester.role).to eq("standard")
+    end
   end
 
   describe "confirmation" do
