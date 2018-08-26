@@ -3,7 +3,8 @@
   <p class="byline">Owned by <span class="author"><%= name_of_wiki_owner(@wiki) %></span></p>
   <p><%= @wiki.body %></p>
   <div class="row">
-  <% if current_user.id == @wiki.user.id %>
+  <% #if current_user.id == @wiki.user.id %>
+  <% if policy(@wiki).edit? %>
   <%= link_to "Edit", edit_wiki_path(@wiki.id), class: 'btn btn-success col-sm-2' %>
   <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger col-sm-2 col-sm-offset-3', data: {confirm: 'Are you sure you want to delete ' + @wiki.title + '?'} %>
   <% end %>

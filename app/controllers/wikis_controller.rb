@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  after_action :verify_authorized
   def index
     @wikis = Wiki.all
     authorize @wikis
