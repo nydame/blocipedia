@@ -39,7 +39,7 @@ users = User.all
 10.times do
   Wiki.create!(
     title: Faker::Myst.game,
-    body: Faker::HitchhikersGuideToTheGalaxy.quote,
+    body: Faker::HitchhikersGuideToTheGalaxy.quote + " " + Faker::Seinfeld.quote + " " + Faker::Simpsons.quote,
     private: [true, false, false].sample, #skew in favor of public wikis
     user: users.sample
   )
