@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_action :verify_authorized, unless: :devise_controller?
 
   protect_from_forgery
   include Pundit

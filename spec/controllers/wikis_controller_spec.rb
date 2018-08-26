@@ -103,20 +103,23 @@ RSpec.describe WikisController, type: :controller do
   end
 
   describe "PUT #update" do
-    it "returns http redirect if user isn't owner of wiki" do
-      sign_out wiki_owner
-      sign_in another_user
-      put :update, params: {id: wiki.id, wiki: {title: "Another title", body: wiki.body, private: wiki.private}}
-      expect(response).to redirect_to(wiki_path(wiki.id))
-    end
     it "updates wiki with expected attributes if user is owner" do
       put :update, params: {id: wiki.id, wiki: {title: "Another title", body: wiki.body, private: wiki.private}}
       updated_wiki = assigns(:wiki)
-      updated_wiki.title = wiki.title
-      updated_wiki.body = wiki.body
-      updated_wiki.private = wiki.private
+      expect(updated_wiki.title).to eq "Another title"
+      expect(updated_wiki.body).to eq wiki.body
+      expect(updated_wiki.private).to eq wiki.private
     end
-    it "redirects to updated wiki if user is owner" do
+    it "updates wiki with expected attributes if user is not owner" do
+      sign_out wiki_owner
+      sign_in another_user
+      put :update, params: {id: wiki.id, wiki: {title: "Yet another title", body: wiki.body, private: wiki.private}}
+      updated_wiki = assigns(:wiki)
+      expect(updated_wiki.title).to eq "Yet another title"
+      expect(updated_wiki.body).to eq wiki.body
+      expect(updated_wiki.private).to eq wiki.private
+    end
+    it "redirects to updated wiki" do
       put :update, params: {id: wiki.id, wiki: {title: "Another title", body: wiki.body, private: wiki.private}}
       expect(response).to redirect_to(wiki_path(wiki.id))
     end
