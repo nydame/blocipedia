@@ -33,6 +33,10 @@ User.create!(
   role: :premium
 )
 
+User.find_each do |user|
+  user.confirm
+end
+
 users = User.all
 
 # Create wikis
