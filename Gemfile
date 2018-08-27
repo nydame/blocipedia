@@ -82,3 +82,6 @@ gem 'devise'
 
 # Add Pundit for Authorization
 gem 'pundit'
+
+# Add Stripe to take care of charges for premium accounts
+gem 'stripe'
