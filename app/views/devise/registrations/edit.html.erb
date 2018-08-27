@@ -1,11 +1,16 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit <%= "Your Account" || resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -34,6 +39,13 @@
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+<% end %>
+
+<% if current_user.role == "standard" %>
+<h3>Upgrade my account</h3>
+<p>Become a Premium member! <%= button_to "Upgrade my account", new_charge_path, method: :get %></p>
+<% elsif current_user.role == "premium" %>
+  <h3>Downgrade my account</h3>
 <% end %>
 
 <h3>Cancel my account</h3>

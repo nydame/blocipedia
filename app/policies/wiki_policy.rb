@@ -13,7 +13,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present?
+    user.present?  && user == wiki.user
   end
 
   def destroy?

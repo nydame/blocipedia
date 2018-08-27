@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # get 'wikis/edit'
   resources :wikis
   devise_for :users
+  resources :charges, only: [:new, :create]
   # get 'welcome/index'
   root 'welcome#index' #same as root({to: 'welcome#index'})
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
