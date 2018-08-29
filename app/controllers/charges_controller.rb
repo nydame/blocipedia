@@ -33,6 +33,10 @@ class ChargesController < ApplicationController
     )
 
     flash[:notice] = "Thanks for becoming a Premium Member!"
+    u = User.find(current_user.id)
+    # puts u.role
+    u.update(role: "premium")
+    # puts u.role
     redirect_to edit_user_registration_path(current_user)
 
     rescue Stripe::CardError => e

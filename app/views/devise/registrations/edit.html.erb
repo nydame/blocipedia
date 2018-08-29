@@ -3,21 +3,29 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
+
+  <% if current_user.role == "premium" %>
+    <div class="field form-group">
+      <%= f.label "Downgrade", class: "checkbox" do %>
+        <%= f.check_box :role, {}, "standard", "premium" %> Check this box to downgrade your role to standard
+      <% end %>
+    </div>
+  <% end %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
     <% if @minimum_password_length %>
@@ -26,12 +34,12 @@
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
@@ -44,8 +52,6 @@
 <% if current_user.role == "standard" %>
 <h3>Upgrade my account</h3>
 <p>Become a Premium member! <%= button_to "Upgrade my account", new_charge_path, method: :get %></p>
-<% elsif current_user.role == "premium" %>
-  <h3>Downgrade my account</h3>
 <% end %>
 
 <h3>Cancel my account</h3>
