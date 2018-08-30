@@ -1,5 +1,5 @@
 <h2>Edit <%= "Your Account" || resource_name.to_s.humanize %></h2>
-
+<div class="container"><div class="row">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -48,14 +48,17 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
-
+</div>
+<div class="row">
 <% if current_user.role == "standard" %>
 <h3>Upgrade my account</h3>
 <p>Become a Premium member! <%= button_to "Upgrade my account", new_charge_path, method: :get %></p>
 <% end %>
-
+</div>
+<div class="row">
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
+</div>
+</div>
 <%= link_to "Back", :back %>
