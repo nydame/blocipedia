@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get 'wikis/new'
   # get 'wikis/edit'
   resources :wikis
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'users/registrations'}
   resources :charges, only: [:new, :create]
   # get 'welcome/index'
   root 'welcome#index' #same as root({to: 'welcome#index'})

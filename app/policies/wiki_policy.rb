@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    user.present? && ! ( user.standard? && wiki.private )
   end
 
   def create?
