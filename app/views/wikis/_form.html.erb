@@ -20,11 +20,13 @@
     <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: 'Enter wiki body' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :private, class: 'checkbox' do %>
-    Keep this wiki private? <%= f.check_box :private, class: 'private-checkbox' %>
-    <% end %>
-  </div>
+  <% if current_user && ! current_user.standard? %>
+    <div class="form-group">
+      <%= f.label :private, class: 'checkbox' do %>
+      Keep this wiki private? <%= f.check_box :private, class: 'private-checkbox' %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.submit "Save", class: 'btn btn-success' %>
