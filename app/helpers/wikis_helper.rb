@@ -5,7 +5,7 @@ module WikisHelper
   end
 
   def render_markdown_as_html(wiki_body)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, no_intra_emphasis: true, tables: true, fenced_code_blocks: true, autolink: true, disable_indented_code_blocks: true, superscript: true)
     markdown.render(wiki_body)
   end
 end
