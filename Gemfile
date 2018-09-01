@@ -85,3 +85,6 @@ gem 'pundit'
 
 # Add Stripe to take care of charges for premium accounts
 gem 'stripe'
+
+# Add RedCarpet to permit editing in Markdown
+gem 'redcarpet'
