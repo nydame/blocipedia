@@ -10,12 +10,12 @@ class CollaborationPolicy < ApplicationPolicy
     #user is owner of wiki associated with this record
     #wiki is private
     #collaboration does not already exist
-    # user_is_cool && wiki_is_cool && ! collaboration_is_redundant
-    user_is_cool
+    # current_user_is_cool && wiki_is_cool
+    current_user_is_cool
   end
 
   def destroy?
-    user_is_cool
+    current_user_is_cool
   end
 
   protected
@@ -34,16 +34,11 @@ class CollaborationPolicy < ApplicationPolicy
     wiki != nil && wiki.private
   end
 
-  def user_is_cool
+  def current_user_is_cool
     # user has signed on
     # user is wiki owner or an admin
     wiki = collaboration.wiki
-    user = wiki.user
-    user.present? || user.admin?
-  end
-
-  def collaboration_is_redundant
-    Collaboration.where({user_id: collaboration.user_id, wiki_id: collaboration.wiki_id}).count > 0
+    wiki.user.present? || current_user.admin?
   end
 
   class Scope < Scope
