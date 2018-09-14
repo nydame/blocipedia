@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
-    <h1>Update <%= @wiki.title %></h1>
+    <h1>Update "<%= @wiki.title %>"</h1>
+    <h2>Edit</h2>
     <%= render partial: 'form', locals: {wiki: @wiki} %>
+    <h2>Add Collaborators</h2>
+    <%= render partial: 'add_collaborators_form', locals: {wiki: @wiki} %>
   </div>
 </div>

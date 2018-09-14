@@ -6,10 +6,19 @@
   <% if @wikis.count === 0 %>
   <p>There are no wikis yet. Why don't <strong>you</strong> start one? ;)</p>
   <% else %>
-    <% @wikis.each do |wiki| %>
+  <h2>Your Wikis</h2>
+    <% current_user.my_wikis.each do |wiki| %>
         <% if policy(wiki).show? %>
         <div class="row">
-          <p><%= link_to wiki.title, wiki_path(wiki) %></p>
+          <p><%= link_to wiki.title, wiki_path(wiki) %><%= wiki.private ? " private" : "" %></p>
+        </div>
+        <% end %>
+    <% end %>
+    <h2>Other Wikis</h2>
+    <% current_user.their_wikis.each do |wiki| %>
+        <% if policy(wiki).show? %>
+        <div class="row">
+          <p><%= link_to wiki.title, wiki_path(wiki) %><%= wiki.private ? " private" : "" %></p>
         </div>
         <% end %>
     <% end %>
