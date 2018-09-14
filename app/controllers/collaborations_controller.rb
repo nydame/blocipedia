@@ -6,10 +6,7 @@ class CollaborationsController < ApplicationController
     user = User.find(params[:collaboration][:user_id])
     @collaboration = wiki.collaborations.build(collaboration_params)
     authorize @collaboration
-    if ! wiki.private
-      redirect_to wiki
-      flash[:notice] do "Collaboration is only possible on private wikis." end
-    elsif @collaboration.save
+    if @collaboration.save
       #TODO send email to collaborator
       redirect_to wiki
       flash[:notice] do "#{user.username} is now a collaborator on #{wiki.title}." end
