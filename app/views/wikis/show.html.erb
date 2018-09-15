@@ -1,7 +1,13 @@
 <div class="container">
   <h1><%= @wiki.title %><%if @wiki.private? %><span class="private-wiki">private</span><% end %></h1>
   <p class="byline">Owned by <span class="author"><%= name_of_wiki_owner(@wiki) %></span></p>
-  <p>Collaborators: <% if collaborator_list(@wiki).size > 0 %><%= collaborator_list(@wiki).map{|c| "#{c[1]}"}*", " %><% else %>none<% end %></p>
+  <% if @wiki.private %>
+    <% if policy(@wiki).edit? %>
+    <p>Collaborators: <% if collaborator_list(@wiki).size > 0 %><%= raw(collaborator_list(@wiki).map{|c| "#{c[1]} " + "<a class=\"btn btn-link\" href=\"/collaborations/#{collaboration_from_user(c[0], @wiki.id)}\" data-method=\"delete\" rel=\"no-follow\" data-confirm=\"Are you sure you want to remove #{c[1]} as a collaborator?\">x</a>"}*", ") %><% else %>none<% end %></p>
+    <% else %>
+    <p>Collaborators: <% if collaborator_list(@wiki).size > 0 %><%= collaborator_list(@wiki).map{|c| "#{c[1]}"}*", " %><% else %>none<% end %></p>
+    <% end %>
+  <% end %>
   <%= raw( render_markdown_as_html(@wiki.body) ) %>
   <div class="row">
   <% #if current_user.id == @wiki.user.id %>
