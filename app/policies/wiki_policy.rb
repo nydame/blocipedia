@@ -1,7 +1,7 @@
 class WikiPolicy < ApplicationPolicy
 
   def index?
-    user.present?
+    true
   end
 
   def show?
@@ -17,8 +17,8 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    # user.present? && (user == wiki.user || user.admin?)
-    user.present?
+    user.present? && (user == wiki.user || user.admin?)
+
   end
 
   protected
