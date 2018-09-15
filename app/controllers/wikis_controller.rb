@@ -1,26 +1,27 @@
 class WikisController < ApplicationController
-  after_action :verify_authorized
+  # after_action :verify_authorized
   def index
-    @wikis = Wiki.all
-    authorize @wikis
+    # @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    # authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    # authorize @wiki
   end
 
   def new
     @user = current_user
     @wiki = Wiki.new
-    authorize @wiki
+    # authorize @wiki
   end
 
   def create
     @user = current_user
     # binding.pry
     @wiki = @user.wikis.build(wiki_params)
-    authorize @wiki
+    # authorize @wiki
     @wiki.user = @user
 
     if @wiki.private? && @wiki.save
@@ -37,12 +38,12 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    # authorize @wiki
   end
 
   def update
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    # authorize @wiki
     @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
@@ -56,7 +57,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    # authorize @wiki
     if @wiki.user == current_user && @wiki.destroy
         flash[:notice] = "Wiki '#{@wiki.title}' was deleted."
         render :index
